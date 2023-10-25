@@ -1,3 +1,3 @@
-package simaqian
+package loki
 
 var _ = New

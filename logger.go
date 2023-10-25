@@ -1,4 +1,4 @@
-package simaqian
+package loki
 
 import (
 	"github.com/goexl/log"
