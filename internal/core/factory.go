@@ -1,6 +1,7 @@
 package core
 
 import (
+	"github.com/goexl/log"
 	"github.com/goexl/loki/internal/executor"
 	"github.com/goexl/loki/internal/param"
 )
@@ -15,6 +16,6 @@ func NewFactory(params *param.Loki) *Factory {
 	}
 }
 
-func (f *Factory) New() (*executor.Loki, error) {
+func (f *Factory) New() (log.Executor, error) {
 	return executor.NewLoki(f.params)
 }
