@@ -43,7 +43,7 @@ func New(ctx context.Context, config *Config) (pusher *Pusher) {
 	pusher.labels = config.Labels
 	pusher.batch = config.Batch
 	pusher.quit = make(chan gox.Empty)
-	pusher.logs = make(chan *internal.Log)
+	pusher.logs = make(chan *internal.Log, 4096)
 
 	pusher.url = fmt.Sprintf("%s/loki/api/v1/push", config.Url)
 	pusher.http.SetBasicAuth(config.Username, config.Password).SetHeader(key.ContentType, key.Json)
