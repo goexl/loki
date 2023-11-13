@@ -63,7 +63,6 @@ func (p *Pusher) Stop() {
 }
 
 func (p *Pusher) Push(log *internal.Log) {
-	fmt.Println("-----------")
 	p.logs <- log
 }
 
