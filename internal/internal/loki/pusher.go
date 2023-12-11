@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/goexl/exc"
+	"github.com/goexl/exception"
 	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
 	"github.com/goexl/http"
@@ -146,7 +146,10 @@ func (p *Pusher) post(data []byte) (err error) {
 	} else if rsp, pe := request.SetBody(buffer).Post(p.url); nil != pe {
 		err = pe
 	} else if rsp.IsError() {
-		err = exc.NewFields("Loki服务器返回错误", field.New("status", rsp.Status()), field.New("body", string(rsp.Body())))
+		err = exception.New().Message("Loki服务器返回错误").Field(
+			field.New("status", rsp.Status()),
+			field.New("body", string(rsp.Body())),
+		).Build()
 	}
 
 	return
@@ -156,7 +159,7 @@ func (p *Pusher) gzip(request *resty.Request, data []byte) (buffer *bytes.Buffer
 	buffer = new(bytes.Buffer)
 	writer := gzip.NewWriter(buffer)
 	if _, we := writer.Write(data); nil != we {
-		err = exc.NewField("压缩数据出错", field.Error(we))
+		err = exception.New().Message("压缩数据出错").Field(field.Error(we)).Build()
 	}
 	if nil == err {
 		err = writer.Close()
