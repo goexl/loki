@@ -7,7 +7,7 @@ require (
 	github.com/goexl/exception v0.0.1
 	github.com/goexl/gox v0.3.8
 	github.com/goexl/http v0.1.0
-	github.com/goexl/log v0.0.5
+	github.com/goexl/log v0.0.7
 	go.uber.org/zap v1.26.0
 )
 
