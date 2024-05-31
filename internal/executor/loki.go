@@ -69,89 +69,89 @@ func (l *Loki) Sync() error {
 
 func (l *Loki) parse(fields ...gox.Field[any]) (parsed []zap.Field) {
 	parsed = make([]zap.Field, 0, len(fields))
-	for _, f := range fields {
-		if "" == f.Key() || nil == f.Value() {
+	for _, field := range fields {
+		if "" == field.Key() || nil == field.Value() {
 			continue
 		}
 
-		switch value := f.Value().(type) {
+		switch value := field.Value().(type) {
 		case bool:
-			parsed = append(parsed, zap.Bool(f.Key(), value))
+			parsed = append(parsed, zap.Bool(field.Key(), value))
 		case *bool:
-			parsed = append(parsed, zap.Boolp(f.Key(), value))
+			parsed = append(parsed, zap.Boolp(field.Key(), value))
 		case []bool:
-			parsed = append(parsed, zap.Bools(f.Key(), value))
+			parsed = append(parsed, zap.Bools(field.Key(), value))
 		case *[]bool:
-			parsed = append(parsed, zap.Bools(f.Key(), *value))
+			parsed = append(parsed, zap.Bools(field.Key(), *value))
 		case int8:
-			parsed = append(parsed, zap.Int8(f.Key(), value))
+			parsed = append(parsed, zap.Int8(field.Key(), value))
 		case *int8:
-			parsed = append(parsed, zap.Int8p(f.Key(), value))
+			parsed = append(parsed, zap.Int8p(field.Key(), value))
 		case int:
-			parsed = append(parsed, zap.Int(f.Key(), value))
+			parsed = append(parsed, zap.Int(field.Key(), value))
 		case *int:
-			parsed = append(parsed, zap.Intp(f.Key(), value))
+			parsed = append(parsed, zap.Intp(field.Key(), value))
 		case []int:
-			parsed = append(parsed, zap.Ints(f.Key(), value))
+			parsed = append(parsed, zap.Ints(field.Key(), value))
 		case *[]int:
-			parsed = append(parsed, zap.Ints(f.Key(), *value))
+			parsed = append(parsed, zap.Ints(field.Key(), *value))
 		case uint:
-			parsed = append(parsed, zap.Uint(f.Key(), value))
+			parsed = append(parsed, zap.Uint(field.Key(), value))
 		case *uint:
-			parsed = append(parsed, zap.Uintp(f.Key(), value))
+			parsed = append(parsed, zap.Uintp(field.Key(), value))
 		case []uint:
-			parsed = append(parsed, zap.Uints(f.Key(), value))
+			parsed = append(parsed, zap.Uints(field.Key(), value))
 		case *[]uint:
-			parsed = append(parsed, zap.Uints(f.Key(), *value))
-		case int64:
-			parsed = append(parsed, zap.Int64(f.Key(), value))
-		case *int64:
-			parsed = append(parsed, zap.Int64p(f.Key(), value))
-		case []int64:
-			parsed = append(parsed, zap.Int64s(f.Key(), value))
-		case *[]int64:
-			parsed = append(parsed, zap.Int64s(f.Key(), *value))
-		case float32:
-			parsed = append(parsed, zap.Float32(f.Key(), value))
-		case *float32:
-			parsed = append(parsed, zap.Float32p(f.Key(), value))
-		case float64:
-			parsed = append(parsed, zap.Float64(f.Key(), value))
-		case *float64:
-			parsed = append(parsed, zap.Float64p(f.Key(), value))
-		case []float64:
-			parsed = append(parsed, zap.Float64s(f.Key(), value))
-		case *[]float64:
-			parsed = append(parsed, zap.Float64s(f.Key(), *value))
-		case *string:
-			parsed = append(parsed, zap.Stringp(f.Key(), value))
-		case []string:
-			parsed = append(parsed, zap.Strings(f.Key(), value))
-		case *[]string:
-			parsed = append(parsed, zap.Strings(f.Key(), *value))
-		case time.Time:
-			parsed = append(parsed, zap.Time(f.Key(), value))
-		case *time.Time:
-			parsed = append(parsed, zap.Timep(f.Key(), value))
-		case []time.Time:
-			parsed = append(parsed, zap.Times(f.Key(), value))
+			parsed = append(parsed, zap.Uints(field.Key(), *value))
 		case time.Duration:
-			parsed = append(parsed, zap.Duration(f.Key(), value))
+			parsed = append(parsed, zap.Duration(field.Key(), value))
 		case *time.Duration:
-			parsed = append(parsed, zap.Durationp(f.Key(), value))
+			parsed = append(parsed, zap.Durationp(field.Key(), value))
+		case int64:
+			parsed = append(parsed, zap.Int64(field.Key(), value))
+		case *int64:
+			parsed = append(parsed, zap.Int64p(field.Key(), value))
+		case []int64:
+			parsed = append(parsed, zap.Int64s(field.Key(), value))
+		case *[]int64:
+			parsed = append(parsed, zap.Int64s(field.Key(), *value))
+		case float32:
+			parsed = append(parsed, zap.Float32(field.Key(), value))
+		case *float32:
+			parsed = append(parsed, zap.Float32p(field.Key(), value))
+		case float64:
+			parsed = append(parsed, zap.Float64(field.Key(), value))
+		case *float64:
+			parsed = append(parsed, zap.Float64p(field.Key(), value))
+		case []float64:
+			parsed = append(parsed, zap.Float64s(field.Key(), value))
+		case *[]float64:
+			parsed = append(parsed, zap.Float64s(field.Key(), *value))
+		case *string:
+			parsed = append(parsed, zap.Stringp(field.Key(), value))
+		case []string:
+			parsed = append(parsed, zap.Strings(field.Key(), value))
+		case *[]string:
+			parsed = append(parsed, zap.Strings(field.Key(), *value))
+		case time.Time:
+			parsed = append(parsed, zap.Time(field.Key(), value))
+		case *time.Time:
+			parsed = append(parsed, zap.Timep(field.Key(), value))
+		case []time.Time:
+			parsed = append(parsed, zap.Times(field.Key(), value))
 		case []time.Duration:
-			parsed = append(parsed, zap.Durations(f.Key(), value))
+			parsed = append(parsed, zap.Durations(field.Key(), value))
 		case json.Marshaler, []json.Marshaler:
 			// 一定要放在 fmt.Stringer 前面，保证优先使用 json 作为序列化器
-			parsed = append(parsed, zap.Reflect(f.Key(), f.Value()))
+			parsed = append(parsed, zap.Reflect(field.Key(), field.Value()))
 		case fmt.Stringer:
-			parsed = append(parsed, zap.Stringer(f.Key(), value))
+			parsed = append(parsed, zap.Stringer(field.Key(), value))
 		case []fmt.Stringer:
-			parsed = append(parsed, zap.Stringers(f.Key(), value))
+			parsed = append(parsed, zap.Stringers(field.Key(), value))
 		case error:
 			parsed = append(parsed, zap.Error(value))
 		default:
-			parsed = append(parsed, zap.Any(f.Key(), f.Value()))
+			parsed = append(parsed, zap.Any(field.Key(), field.Value()))
 		}
 	}
 

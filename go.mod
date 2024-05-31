@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/go-resty/resty/v2 v2.13.1
 	github.com/goexl/exception v0.0.1
-	github.com/goexl/gox v0.3.8
+	github.com/goexl/gox v0.4.9
 	github.com/goexl/http v0.1.9
 	github.com/goexl/log v0.0.7
 	go.uber.org/zap v1.27.0
