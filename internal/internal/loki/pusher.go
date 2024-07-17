@@ -34,6 +34,7 @@ type Pusher struct {
 	labels gox.Labels
 	url    string
 	logger *zap.Logger
+	warn   bool
 }
 
 func New(ctx context.Context, config *Config) (pusher *Pusher) {
@@ -115,8 +116,9 @@ func (p *Pusher) send(logs *[]*internal.Log) (err error) {
 	} else {
 		err = p.post(data)
 	}
-	if nil != err {
+	if nil != err && !p.warn {
 		p.logger.Warn("推送日志出错", zap.Error(err))
+		p.warn = true
 	}
 
 	return
