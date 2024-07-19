@@ -61,6 +61,13 @@ func (l *Loki) Label(key string, value string) (loki *Loki) {
 	return
 }
 
+func (l *Loki) Tenant(tenant string) (loki *Loki) {
+	l.params.Tenant = tenant
+	loki = l
+
+	return
+}
+
 func (l *Loki) Http(http *http.Client) (loki *Loki) {
 	l.params.Http = http
 	loki = l

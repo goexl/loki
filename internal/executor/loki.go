@@ -24,15 +24,10 @@ func NewLoki(params *param.Loki) (logger *Loki, err error) {
 	lokiConfig.Batch = params.Batch
 	lokiConfig.Http = params.Http
 
-	if 0 != len(params.Labels) {
-		lokiConfig.Labels = params.Labels
-	}
-	if "" != params.Username {
-		lokiConfig.Username = params.Username
-	}
-	if "" != params.Password {
-		lokiConfig.Password = params.Password
-	}
+	lokiConfig.Labels = params.Labels
+	lokiConfig.Username = params.Username
+	lokiConfig.Password = params.Password
+	lokiConfig.Tenant = params.Tenant
 	pusher := loki.New(context.Background(), lokiConfig)
 	logger.zap, err = pusher.Build(config.DefaultZap(), zap.WithCaller(false))
 

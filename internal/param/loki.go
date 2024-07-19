@@ -11,6 +11,7 @@ type Loki struct {
 	Batch    *config.Batch
 	Username string
 	Password string
+	Tenant   string
 	Http     *http.Client
 }
 

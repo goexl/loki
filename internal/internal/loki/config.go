@@ -12,5 +12,6 @@ type Config struct {
 	Labels   gox.Labels
 	Username string
 	Password string
+	Tenant   string
 	Http     *http.Client
 }
