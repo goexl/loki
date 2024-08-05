@@ -3,7 +3,7 @@ module github.com/goexl/loki
 go 1.22
 
 require (
-	github.com/go-resty/resty/v2 v2.13.1
+	github.com/go-resty/resty/v2 v2.14.0
 	github.com/goexl/exception v0.0.1
 	github.com/goexl/gox v0.5.2
 	github.com/goexl/http v0.1.9
