@@ -4,7 +4,7 @@ go 1.22
 toolchain go1.23.1
 
 require (
-	github.com/go-resty/resty/v2 v2.16.2
+	github.com/go-resty/resty/v2 v2.16.3
 	github.com/goexl/exception v0.0.3
 	github.com/goexl/gox v1.9.2
 	github.com/goexl/http v0.2.1
@@ -15,5 +15,5 @@ require (
 require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/net v0.30.0 // indirect
+	golang.org/x/net v0.33.0 // indirect
 )
