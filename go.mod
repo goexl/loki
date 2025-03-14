@@ -1,7 +1,6 @@
 module github.com/goexl/loki
 
-go 1.22
-toolchain go1.23.1
+go 1.24
 
 require (
 	github.com/go-resty/resty/v2 v2.16.5
@@ -15,5 +14,7 @@ require (
 require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
+	golang.org/x/net v0.37.0 // indirect
 )
+
+replace github.com/goexl/log => ../log
