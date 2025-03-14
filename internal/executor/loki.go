@@ -7,11 +7,15 @@ import (
 	"time"
 
 	"github.com/goexl/gox"
+	"github.com/goexl/log"
 	"github.com/goexl/loki/internal/executor/internal/config"
 	"github.com/goexl/loki/internal/internal/loki"
 	"github.com/goexl/loki/internal/param"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
+
+var _ log.Executor = (*Loki)(nil)
 
 type Loki struct {
 	zap *zap.Logger
@@ -29,7 +33,10 @@ func NewLoki(params *param.Loki) (logger *Loki, err error) {
 	lokiConfig.Password = params.Password
 	lokiConfig.Tenant = params.Tenant
 	pusher := loki.New(context.Background(), lokiConfig)
-	logger.zap, err = pusher.Build(config.DefaultZap(), zap.WithCaller(false))
+
+	zapConfig := config.DefaultZap()                           // 从默认配置继承
+	zapConfig.Level = zap.NewAtomicLevelAt(zapcore.DebugLevel) // !确保在最低日志级别，由上层代码处理日志级别
+	logger.zap, err = pusher.Build(zapConfig, zap.WithCaller(false) /*不打印调用链路，由上层代码处理*/)
 
 	return
 }
