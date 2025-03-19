@@ -17,7 +17,8 @@ type Loki struct {
 
 func NewLoki() *Loki {
 	return &Loki{
-		Batch: config.NewBatch(),
-		Http:  http.New().Build(),
+		Labels: make(map[string]string),
+		Batch:  config.NewBatch(),
+		Http:   http.New().Build(),
 	}
 }
