@@ -1,8 +1,6 @@
 package builder
 
 import (
-	"time"
-
 	"github.com/goexl/http"
 	"github.com/goexl/loki/internal/core"
 	"github.com/goexl/loki/internal/param"
@@ -39,12 +37,12 @@ func (l *Loki) Password(password string) (loki *Loki) {
 	return
 }
 
-func (l *Loki) Batch(size int, wait time.Duration) (loki *Loki) {
-	l.params.Batch.Size = size
-	l.params.Batch.Wait = wait
-	loki = l
+func (l *Loki) Batch() *Batch {
+	return newBatch(l.params.Batch, l)
+}
 
-	return
+func (l *Loki) Queue() *Queue {
+	return newQueue(l.params.Queue, l)
 }
 
 func (l *Loki) Labels(labels map[string]string) (loki *Loki) {
