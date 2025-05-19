@@ -41,37 +41,37 @@ func NewLoki(params *param.Loki) (logger *Loki, err error) {
 	return
 }
 
-func (l *Loki) Debug(msg string, fields ...gox.Field[any]) {
-	l.zap.Debug(msg, l.parse(fields...)...)
+func (l *Loki) Debug(msg string, required gox.Field[any], fields ...gox.Field[any]) {
+	l.zap.Debug(msg, l.parse(required, fields...)...)
 }
 
-func (l *Loki) Info(msg string, fields ...gox.Field[any]) {
-	l.zap.Info(msg, l.parse(fields...)...)
+func (l *Loki) Info(msg string, required gox.Field[any], fields ...gox.Field[any]) {
+	l.zap.Info(msg, l.parse(required, fields...)...)
 }
 
-func (l *Loki) Warn(msg string, fields ...gox.Field[any]) {
-	l.zap.Warn(msg, l.parse(fields...)...)
+func (l *Loki) Warn(msg string, required gox.Field[any], fields ...gox.Field[any]) {
+	l.zap.Warn(msg, l.parse(required, fields...)...)
 }
 
-func (l *Loki) Error(msg string, fields ...gox.Field[any]) {
-	l.zap.Error(msg, l.parse(fields...)...)
+func (l *Loki) Error(msg string, required gox.Field[any], fields ...gox.Field[any]) {
+	l.zap.Error(msg, l.parse(required, fields...)...)
 }
 
-func (l *Loki) Panic(msg string, fields ...gox.Field[any]) {
-	l.zap.Panic(msg, l.parse(fields...)...)
+func (l *Loki) Panic(msg string, required gox.Field[any], fields ...gox.Field[any]) {
+	l.zap.Panic(msg, l.parse(required, fields...)...)
 }
 
-func (l *Loki) Fatal(msg string, fields ...gox.Field[any]) {
-	l.zap.Fatal(msg, l.parse(fields...)...)
+func (l *Loki) Fatal(msg string, required gox.Field[any], fields ...gox.Field[any]) {
+	l.zap.Fatal(msg, l.parse(required, fields...)...)
 }
 
 func (l *Loki) Sync() error {
 	return l.zap.Sync()
 }
 
-func (l *Loki) parse(fields ...gox.Field[any]) (parsed []zap.Field) {
-	parsed = make([]zap.Field, 0, len(fields))
-	for _, field := range fields {
+func (l *Loki) parse(required gox.Field[any], optionals ...gox.Field[any]) (parsed []zap.Field) {
+	parsed = make([]zap.Field, 0, len(optionals)+1)
+	for _, field := range append([]gox.Field[any]{required}, optionals...) {
 		if "" == field.Key() || nil == field.Value() {
 			continue
 		}
