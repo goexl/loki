@@ -8,7 +8,7 @@ require (
 	github.com/goexl/gox v1.9.2
 	github.com/goexl/http v0.2.1
 	github.com/goexl/log v0.1.0
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	go.uber.org/zap v1.27.0
 )
 
