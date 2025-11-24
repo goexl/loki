@@ -9,7 +9,7 @@ require (
 	github.com/goexl/http v0.2.1
 	github.com/goexl/log v0.1.0
 	github.com/stretchr/testify v1.11.1
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 )
 
 require (
